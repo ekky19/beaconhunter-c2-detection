@@ -110,13 +110,34 @@ This will:
 
 ## 🔍 Anomaly Scoring
 
-Simple metric based on:
+### 📈 What is Anomaly Score?
 
-```python
-score = (consistency_percent / mode_interval)
+The **Anomaly Score** is a custom metric designed to represent how “beacon-like” a communication pattern is — combining **consistency** and **interval timing** into a single value.
+
+#### 💡 Formula:
+
+```plaintext
+Anomaly Score = (Consistency % / Mode Interval)
 ```
 
-Higher = more suspicious
+* **Consistency %**: Percentage of intervals that match the most common timing (within ±10s jitter).
+* **Mode Interval**: The most frequently observed time gap (in seconds) between connections.
+
+#### 🧪 Example:
+
+| Intervals (seconds) | \[60, 60, 59, 60, 61] |
+| ------------------- | --------------------- |
+| Mode Interval       | 60                    |
+| Consistency         | 100%                  |
+| Anomaly Score       | 100 / 60 = **1.66**   |
+
+---
+
+### 🔍 How to interpret:
+
+* **Higher = more suspicious** (tight, regular patterns)
+* **Lower = less likely to be beaconing**
+* Scores above `1.0` often indicate **highly consistent, frequent communication** — common in malware beacons
 
 ---
 
