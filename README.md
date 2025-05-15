@@ -172,7 +172,7 @@ python beaconhunter.py
 ### Key Differences
 Here’s a breakdown of the key differences between the Python-based BeaconHunter and the previous PowerShell version I built:
 
-##1. Detection Capabilities
+## 1. Detection Capabilities
    
 | Feature                                | PowerShell Version        | Python Version (Current)       |
 | -------------------------------------- | ------------------------  | ------------------------------ |
@@ -184,7 +184,7 @@ Here’s a breakdown of the key differences between the Python-based BeaconHunte
 | Anomaly scoring                        | ❌                        | ✅ Interval & consistency based |
 | Timeline analysis                      | Basic                     | ✅ More detailed + timestamps   |
 
-##2. Usability & Output
+## 2. Usability & Output
 
 | Feature                          | PowerShell Version  | Python Version (Current)            |
 | -------------------------------- | ------------------  | ----------------------------------- |
@@ -194,7 +194,7 @@ Here’s a breakdown of the key differences between the Python-based BeaconHunte
 | Filtering & structured view      | ❌                  | ✅ Column-based & sortable           |
 | C2 enrichment auto-updater       | ❌                  | ✅ `beaconhunter.py updatec2list`    |
 
-##3. Flexibility & Extensibility
+## 3. Flexibility & Extensibility
    
 | Feature                               | PowerShell Version | Python Version                 |
 | ------------------------------------- | ------------------ | ------------------------------ |
@@ -204,7 +204,7 @@ Here’s a breakdown of the key differences between the Python-based BeaconHunte
 | Multi-file batch support (CSV folder) | ❌                  | ✅                            |
 
 
-##Summary
+## Summary
 |                      | PowerShell BeaconHunter | Python BeaconHunter               |
 | -------------------- | ----------------------- | --------------------------------- |
 | Good for quick scans | ✅                       | ✅                                 |
