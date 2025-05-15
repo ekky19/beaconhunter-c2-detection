@@ -86,7 +86,7 @@ When you click on any C2 IP in the HTML report, the `OSINT.HTML` tool will:
 
 ## 🔄 Updating Known C2 List
 
-Run this command to fetch the latest malicious IP\:Port indicators:
+Run this command to fetch the latest malicious IP indicators:
 
 ```bash
 python beaconhunter.py updatec2list
@@ -95,7 +95,7 @@ python beaconhunter.py updatec2list
 This will:
 
 * Download ThreatFox feed from `abuse.ch`
-* Extract valid `ip:port` C2 IOCs
+* Extract valid ip C2 IOCs
 * Save to local `known_c2_list.txt`
 
 ---
