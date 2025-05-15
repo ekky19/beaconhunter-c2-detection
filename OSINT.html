@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OSINT Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --radius: 0.75rem;
+      --gap: 1rem;
+      --transition: 0.3s ease;
+    }
+    [data-theme="dark"] {
+      --bg: #1f2937;
+      --card-bg: #2e3a47;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #60a5fa;
+      --primary-hover: #3b82f6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: var(--gap);
+      transition: background var(--transition), color var(--transition);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      padding: var(--gap) 0;
+      margin-bottom: var(--gap);
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.3rem;
+      transition: color var(--transition), background var(--transition);
+    }
+    .toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .search-bar,
+    .filter-bar {
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto var(--gap);
+      gap: 0.5rem;
+    }
+    .search-bar input,
+    .filter-bar input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: border-color var(--transition);
+    }
+    .search-bar input:focus,
+    .filter-bar input:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .search-bar button {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      border: none;
+      border-radius: var(--radius);
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .search-bar button:hover {
+      background: var(--primary-hover);
+    }
+    .section {
+      margin-top: calc(var(--gap) * 2);
+    }
+    .section h2 {
+      font-size: 1.25rem;
+      margin-bottom: var(--gap);
+      color: var(--muted);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.25rem;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+    }
+    .card {
+      background: var(--card-bg);
+      padding: var(--gap);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 5;
+    }
+    .card a {
+      display: block;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color var(--transition);
+    }
+    .card a:hover {
+      color: var(--primary-hover);
+    }
+    .tooltip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-0.5rem);
+      background: var(--text);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .card:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-0.75rem);
+	  
+    }
+	
+	[data-theme="dark"] .tooltip {
+		color: black; 
+	}
+
+  </style>
+</head>
+
+<body data-theme="dark">
+  <header>
+    <h1>OSINT Dashboard</h1>
+    <button class="toggle" id="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+  </header>
+
+  <form class="search-bar" onsubmit="updateLinks(event)">
+    <input id="search" placeholder="Enter IP, URL or hash..." required />
+    <button type="submit">ADD</button>
+  </form>
+
+  <div class="filter-bar">
+    <input id="filter" placeholder="Filter tools..." />
+  </div>
+
+  <div id="content"></div>
+
+  <script>
+    document.getElementById('theme-toggle').onclick = () => {
+      const body = document.body;
+      body.dataset.theme = body.dataset.theme === 'light' ? 'dark' : 'light';
+    };
+
+   const categories = {
+  "Search Tools": [
+    { name: 'Virus Total', url: 'https://www.virustotal.com/gui/search/', desc:'Analyse suspicious files, domains, IPs & URLs'},
+    { name: 'Web Check', url:'https://web-check.xyz/check/', desc:'All-in-one OSINT website analyzer'},
+    { name: 'IntelX', url:'https://intelx.io/?s=', desc:'Deep-dive OSINT search engine'},
+    { name: 'urlscan.io', url:'https://urlscan.io/search/#', desc:'Scan & analyze URLs'},
+    { name: 'Google Safe Browsing', url:'https://transparencyreport.google.com/safe-browsing/search?url=', desc:'Identify dangerous sites'},
+    { name: 'URLhaus', url:'https://urlhaus.abuse.ch/browse.php?search=', desc:'Malicious URL tracker'},
+    { name: 'Hybrid Analysis', url:'https://www.hybrid-analysis.com/search?query=', desc:'Malware analysis & threat intel'},
+    { name: 'Soc Radar IOC', url:'https://socradar.io/labs/ioc-radar/', desc:'Search IOCs'},
+    { name: 'Pulsedive', url:'https://pulsedive.com/ioc/', desc:'Threat intelligence'},
+    { name: 'AbuseIPDB', url:'https://www.abuseipdb.com/check/', desc:'Reported malicious IPs DB'},
+    { name: 'Censys', url:'https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=', desc:'Internet device data'},
+    { name:'Shodan', url:'https://www.shodan.io/search?query=', desc:'Internet-connected device search'},
+    { name:'Robtex', url:'https://www.robtex.com/ip-lookup/', desc:'IP lookup tool'},
+    { name:'Netcraft', url:'https://searchdns.netcraft.com/?restriction=site+contains&host=', desc:'Domain tech info'},
+    { name:'WhoisXML', url:'https://whois.whoisxmlapi.com/lookup?q=', desc:'Domain WHOIS data'},
+    { name:'urlvoid', url:'https://www.urlvoid.com/scan/', desc:''},
+    
+	{
+	  name: 'CentralOps',
+	  template: 'https://centralops.net/co/DomainDossier.aspx?addr={{query}}&_body=DomainDossier.aspx&dom_dns=true&dom_whois=true&net_whois=true',
+	  desc: 'DNS/WHOIS for domains and IPs'
+	},
+	
+	{
+	  name: 'Fortiguard',
+	  template: 'https://www.fortiguard.com/search?q={{query}}&engine=7',
+	  desc: 'Fortinet threat intelligence'
+	},
+
+	{
+	  name: 'Meta Domain',
+	  template: 'https://metadefender.opswat.com/results/domain/{{query}}/overview',
+	  desc: 'Meta Defender cloud domain name scanner'
+	},
+
+    { name:'Sucuri', url:'https://sitecheck.sucuri.net/results/', desc:'Website malware checker'},
+    { name:'Threat Yeti', url:'https://threatyeti.com/search?q=', desc:'AI-driven domain/IP intelligence'},
+    { name:'MyWOT', url:'https://www.mywot.com/scorecard/', desc:''},
+    { name:'crt.sh', url:'https://crt.sh/?q=', desc:'Certificate transparency records'},
+    { name:'Security Trails', url:'https://securitytrails.com/', desc:'Domain & DNS data'},
+    { name:'Whoxy', url:'https://www.whoxy.com/', desc:''},
+    { name:'BuiltWith', url:'https://builtwith.com/', desc:''},
+    {
+	  name: 'SimilarWeb',
+	  template: 'https://www.similarweb.com/website/{{query}}/#overview',
+	  desc: 'Website traffic and ranking data'
+	}
+
+  ],
+  "IP INFO": [
+    { name:'IP Void', url:'https://www.ipvoid.com/scan/', desc:''},
+    { name:'IP to Hostname', url:'https://dnschecker.org/ip-to-hostname.php?query=', desc:''},
+    { name:'ARIN', url:'https://search.arin.net/rdap/?query=', desc:''},
+    { name:'DomainTools', url:'https://whois.domaintools.com/', desc:''},
+    { name:'IPinfo', url:'https://ipinfo.io/', desc:''},
+    { name:'GeoIP (HackerTarget)', url:'https://api.hackertarget.com/geoip/?q=', desc:''},
+    { name:'DNSLookup HT', url:'https://api.hackertarget.com/dnslookup/?q=', desc:''},
+    { name:'IP Quality Score', url:'https://www.ipqualityscore.com/free-ip-lookup-proxy-vpn-test/lookup/', desc:''},
+    { name:'MaxMind GeoIP2', url:'https://www.maxmind.com/en/geoip2-precision-demo?ip_address=', desc:''},
+    { name:'Spur', url:'https://spur.us/context/', desc:''},
+    
+	{
+	  name: 'MX DNS lookup',
+	  template: 'https://mxtoolbox.com/SuperTool.aspx?action=a%3a{{query}}&run=toolpage',
+	  desc: 'DNS A record lookup'
+	},
+	
+    {
+	  name: 'MXToolbox',
+	  template: 'https://mxtoolbox.com/SuperTool.aspx?action=mx%3a{{query}}&run=toolpage',
+	  desc: 'MX Toolbox'
+	},
+   
+    { name:'Whois', url:'https://www.whois.com/whois/', desc:''},
+    { name:'WhatIsMyIP', url:'https://whatismyipaddress.com/ip/', desc:''},
+    { name:'DNS Checker', url:'https://dnschecker.org/#A/', desc:''},
+    
+	{
+	  name: 'DNSDumpster',
+	  template: 'https://dnsdumpster.com/?target={{query}}&user=free',
+	  desc: 'Passive DNS and domain mapping tool'
+	},
+
+	{
+	  name: 'Meta IP',
+	  template: 'https://metadefender.opswat.com/results/ip/{{query}}/overview',
+	  desc: 'Meta Defender IP scanner'
+	},
+	
+    { name:'FeodoTracker', url:'https://feodotracker.abuse.ch/browse.php?search=', desc:''},
+    { name:'Sans ISC', url:'https://isc.sans.edu/ipinfo.html?ip=', desc:''},
+    {
+	  name: 'BotScout',
+	  template: 'https://botscout.com/search.htm?sterm={{query}}&stype=q',
+	  desc: 'BotScout lookup'
+	},
+
+    { name:'IPHub', url:'https://iphub.info/?ip=', desc:''},
+    { name:'Criminal IP', url:'https://www.criminalip.io/en/asset/search?query=', desc:''},
+    { name:'Scamalytics', url:'https://scamalytics.com/ip/', desc:''},
+    { name:'Sicehice', url:'https://sicehice.com/search?ip=', desc:''},
+    { name:'Ping IPv4', url:'https://dnschecker.org/ping-ipv4.php?address=', desc:''}
+  ],
+  "THREAT INTELLIGENCE": [
+    { name:'Microsoft Defender TI', url:'https://ti.defender.microsoft.com/search?query=', desc:''},
+    { name:'IBM X-Force', url:'https://exchange.xforce.ibmcloud.com/', desc:''},
+    { name:'ThreatMiner', url:'https://www.threatminer.org/domain.php?q=', desc:''},
+    { name:'GreyNoise', url:'https://viz.greynoise.io/query/?gnql=', desc:''},
+    { name:'AlienVault OTX', url:'https://otx.alienvault.com/indicator/domain/', desc:''},
+    { name:'Onyphe', url:'https://www.onyphe.io/search?q=category:datascan+', desc:''},
+    { name:'SocRadar TH', url:'https://platform.socradar.com/app/threat-hunting?q=', desc:''},
+    { name:'Talos Intelligence', url:'https://talosintelligence.com/reputation_center/lookup?search=', desc:''},
+    { name:'Falcon Feeds', url:'https://dash.falconfeeds.io/threat-feed/posts', desc:''},
+    { name:'CrowdSec Intel', url:'https://app.crowdsec.net/cti/', desc:''},
+    {
+	  name: 'Maltiverse',
+	  template: 'https://maltiverse.com/search;query={{query}};page=1;sort=creation_time_desc',
+	  desc: 'Maltiverse threat intelligence search'
+	},
+
+    { name:'Mnemonic', url:'https://act-eu1.mnemonic.no/', desc:''},
+    { name:'LeakIX', url:'https://leakix.net/', desc:''},
+    { name:'Dehashed', url:'https://www.dehashed.com/', desc:''}
+  ],
+  "Hash Lookup": [
+    { name:'Valhalla', url:'https://valhalla.nextron-systems.com', desc:''},
+    { name:'VirusTotal (Hash)', url:'https://www.virustotal.com/gui/search/', desc:''},
+    { name:'Jotti', url:'https://virusscan.jotti.org/en-US/search/hash/', desc:''}
+  ],
+  "Email": [
+    { name:'Email Hunter', url:'https://hunter.io/search/', desc:''},
+    { name:'Email Finder', url:'https://hunter.io/find/', desc:'', skipSearch: true },
+    { name:'EmailRep', url:'https://emailrep.io/', desc:'', skipSearch: true },
+    { name:'Email Headers', url:'https://exchangedefender.com/docs/analyzing-smtp-mail-headers', desc:'', skipSearch: true},
+    {
+	  name: 'Epieos',
+	  template: 'https://epieos.com/?q={{query}}&t=email', 
+	  desc: 'Email lookup via Epieos'
+	},
+
+    { name:'HaveIBeenPwned', url:'https://haveibeenpwned.com/', desc:'', skipSearch: true},
+    { name:'PhoneBook.cz', url:'https://phonebook.cz/', desc:'', skipSearch: true},
+    { name:'Voilanorbert', url:'https://www.voilanorbert.com/', desc:'', skipSearch: true},
+    { name:'Email Checker', url:'https://email-checker.net/', desc:'', skipSearch: true}
+  ],
+  "ATTACK SURFACE": [
+    { name:'FullHunt', url:'https://fullhunt.io/', desc:'', skipSearch: true},
+    { name:'Netlas', url:'https://app.netlas.io/', desc:'', skipSearch: true}
+  ],
+  "VULNERABILITY DATABASE": [
+    { name:'Vulners', url:'https://vulners.com/', desc:'', skipSearch: true},
+    { name:'ExploitDB', url:'https://www.exploit-db.com/', desc:'', skipSearch: true}
+  ],
+  "OTHERS": [
+    { name:'Intezer', url:'https://analyze.intezer.com/', desc:'', skipSearch: true},
+    { name:'Browserling', url:'https://www.browserling.com/browse/win/7/chrome/109/', desc:'', skipSearch: true},
+    { name:'ANY.RUN', url:'https://app.any.run/', desc:'', skipSearch: true},
+    { name:'JoeSandbox', url:'https://www.joesandbox.com/', desc:'', skipSearch: true},
+    { name:'Malshare', url:'https://malshare.com/', desc:'', skipSearch: true},
+    { name:'CyberChef', url:'https://gchq.github.io/CyberChef/', desc:'', skipSearch: true},
+    { name:'OpenPhish', url:'https://openphish.com/', desc:'', skipSearch: true},
+    { name:'ThreatView', url:'https://threatview.io/', desc:'', skipSearch: true},
+    { name:'PhishTank', url:'https://www.phishtank.com/', desc:'', skipSearch: true},
+    { name:'icanhazip', url:'https://ipv4.icanhazip.com', desc:'', skipSearch: true},
+    { name:'Cloudflare Radar', url:'https://radar.cloudflare.com/scan', desc:'', skipSearch: true},
+    { name:'CurrentMillis', url:'https://currentmillis.com/', desc:'', skipSearch: true},
+    { name:'IPTools', url:'https://hackertarget.com/ip-tools/', desc:'', skipSearch: true},
+    { name:'ScreenshotMachine', url:'https://www.screenshotmachine.com/', desc:'', skipSearch: true},
+    { name:'SocRadArtTools', url:'https://socradar.io/labs/soc-tools/ip-reputation', desc:'', skipSearch: true},
+    { name:'SophosIntelix', url:'https://intelix.sophos.com/url', desc:'', skipSearch: true},
+    { name:'CheckPhish', url:'https://checkphish.ai/', desc:'', skipSearch: true},
+    { name:'RocketReach', url:'https://rocketreach.co/person', desc:'', skipSearch: true},
+    { name:'ZoomEye', url:'https://www.zoomeye.org/', desc:'', skipSearch: true},
+    { name:'OSINTFramework', url:'https://osintframework.com/', desc:'', skipSearch: true},
+    { name:'MyOSINT Tools', url:'https://www.myosint.training/pages/projects', desc:'', skipSearch: true},
+    { name:'ViewDNS', url:'https://viewdns.info/', desc:'', skipSearch: true},
+    { name:'Google Advanced', url:'https://www.google.com/advanced_search', desc:'', skipSearch: true},
+    { name:'DorkSearch', url:'https://dorksearch.com/', desc:'', skipSearch: true},
+    { name:'ScamSearch', url:'https://www.scamsearch.io/', desc:'', skipSearch: true},
+    { name:'OSINTCrypto', url:'https://github.com/aaarghhh/awesome_osint_criypto_web3_stuff', desc:'', skipSearch: true},
+    { name:'GrayHatWarfare', url:'https://buckets.grayhatwarfare.com/', desc:'', skipSearch: true},
+    { name:'WhatsMyName', url:'https://whatsmyname.app/', desc:'', skipSearch: true}
+  ],
+  "CODE SEARCH": [
+    {name: "Grep",url: "https://grep.app/",desc: "Codes Search", skipSearch: true},
+	{name: "Search Code",url: "https://searchcode.com/",desc: "Search Code",skipSearch: true
+	},
+	{name: "Publicwww",url: "https://publicwww.com/",desc: "Source Code Search Engine", skipSearch: true
+	}
+  ],
+  "NEWS": [
+	  { name: "The Dfir Report", url: "https://thedfirreport.com/", desc: "DFIR writeups and attack reports", skipSearch: true },
+	  { name: "Week In OSINT", url: "https://sector035.nl/articles/category:week-in-osint", desc: "Weekly OSINT roundup" , skipSearch: true},
+	  { name: "Bleeping Computer", url: "https://www.bleepingcomputer.com/", desc: "Security news and malware analysis" , skipSearch: true},
+	  { name: "The Hacker News", url: "https://thehackernews.com/", desc: "Cybersecurity news & threat updates" , skipSearch: true},
+	  { name: "Security Week", url: "https://www.securityweek.com/", desc: "Latest security & industry trends" , skipSearch: true},
+	  { name: "Threat Post", url: "https://threatpost.com/", desc: "Cybersecurity research and alerts" , skipSearch: true},
+	  { name: "Wired", url: "https://www.wired.com/category/security/", desc: "Security and privacy in tech" , skipSearch: true},
+	  { name: "Cyware", url: "https://cyware.com/cyber-security-news-articles", desc: "Threat news and analysis" , skipSearch: true},
+	  { name: "Helpnet Security", url: "https://www.helpnetsecurity.com/", desc: "Security news and updates" , skipSearch: true},
+	  { name: "Darkreading", url: "https://www.darkreading.com/threat-intelligence", desc: "Threat intelligence and defense" , skipSearch: true},
+	  { name: "Infosecurity Magazine", url: "https://www.infosecurity-magazine.com/threat-intelligence/", desc: "Security news magazine" , skipSearch: true},
+	  { name: "Trendmicro", url: "https://www.trendmicro.com/vinfo/us/security/news/vulnerabilities-and-exploits", desc: "Exploit and threat updates" , skipSearch: true}
+	],
+
+  "PODCASTS": [
+	  { name: "Breadcrumbs", url: "https://open.spotify.com/show/1PHveMFjdgyxJJAZJWWF8G", desc: "TraceLabs podcast on OSINT" , skipSearch: true},
+	  { name: "Layer 8 Podcast", url: "https://podcasts.apple.com/us/podcast/layer-8-podcast/id1495404846", desc: "Human side of social engineering" , skipSearch: true},
+	  { name: "OSINT Show", url: "https://open.spotify.com/show/1vqRjYaq1pPcCdCTtMmFg9", desc: "OSINT interviews and discussion" , skipSearch: true},
+	  { name: "The OSINT Bunker", url: "https://rss.com/podcasts/theosintbunker/", desc: "Security & OSINT roundtable" , skipSearch: true},
+	  { name: "Intel Techniques", url: "https://inteltechniques.com/podcast.html", desc: "Privacy and OSINT talk" , skipSearch: true},
+	  { name: "Janes Podcast", url: "https://podcast.janes.com/public/68/The-World-of-Intelligence-50487d09", desc: "Military and intelligence" , skipSearch: true},
+	  { name: "Malwarebytes", url: "https://www.malwarebytes.com/blog/category/podcast", desc: "Malwarebytes security podcast", skipSearch: true }
+	],
+	"USEFUL THINGS": [
+	  {
+		name: "Lolbas",
+		url: "https://lolbas-project.github.io/",
+		desc: "Living Off the Land Binaries and Scripts" , skipSearch: true
+	  },
+	  {
+		name: "Echotrail",
+		url: "https://www.echotrail.io/insights",
+		desc: "Process insights: description, frequency, command usage" , skipSearch: true
+	  },
+	  {
+		name: "Ruler Project",
+		url: "https://ruler-project.github.io/ruler-project/RULER/remote/",
+		desc: "Project RULER: Remote execution references" , skipSearch: true
+	  }
+	]
+
+
+};
+	
+	function replaceSpecialCharacters(str) {
+		return str.replaceAll("/", "%252F").replaceAll(":", "%253A");
+	}
+
+    function renderCategory(title, items) {
+      const section = document.createElement('div'); section.className = 'section';
+      section.innerHTML = `<h2>${title}</h2><div class="grid"></div>`;
+      const grid = section.querySelector('.grid');
+      items.forEach(tool => {
+        const card = document.createElement('div'); card.className = 'card';
+        const link = document.createElement('a'); link.textContent = tool.name;
+        link.href = tool.url; link.target = '_blank';
+        const tip = document.createElement('div'); tip.className = 'tooltip'; tip.textContent = tool.desc;
+        card.append(link, tip);
+        grid.append(card);
+      });
+      return section;
+    }
+
+	// ✅ Auto-fill and trigger ADD from URL ?ip=... or ?q=...
+	window.addEventListener('DOMContentLoaded', () => {
+	  const params = new URLSearchParams(window.location.search);
+	  const value = params.get('ip') || params.get('q'); // support ?ip= or ?q=
+
+	  if (value) {
+		const input = document.getElementById('search');
+		input.value = value;
+
+		// Simulate submit
+		const fakeEvent = new Event('submit');
+		const form = document.querySelector('.search-bar');
+		form.dispatchEvent(fakeEvent);
+	  }
+	});
+
+
+    function renderAll(filter = '') {
+      const container = document.getElementById('content'); container.innerHTML = '';
+      Object.entries(categories).forEach(([title, items]) => {
+        const filtered = items.filter(t => t.name.toLowerCase().includes(filter) || t.desc.toLowerCase().includes(filter));
+        if (filtered.length) container.append(renderCategory(title, filtered));
+      });
+    }
+
+    document.getElementById('filter').addEventListener('input', e => {
+      renderAll(e.target.value.trim().toLowerCase());
+    });
+	
+	document.getElementById('filter').addEventListener('dblclick', () => {
+	  const filterInput = document.getElementById('filter');
+	  filterInput.value = '';
+	  renderAll(); // Clear filter and re-render all tools
+	});
+
+
+function replaceSpecialCharacters(str) {
+  // Single-level encoding for VirusTotal (avoid %25 double encoding)
+  return str.replaceAll("/", "%2F").replaceAll(":", "%3A");
+}
+
+function sanitizeInput(str) {
+  return str.replace(/^https?:\/\//, '').replace(/\/$/, '');
+}
+
+function updateLinks(e) {
+  e.preventDefault();
+
+  const searchInput = document.getElementById('search');
+  const raw = searchInput.value.trim();
+  const cleaned = sanitizeInput(raw);
+  const encoded = encodeURIComponent(cleaned);
+  const fullEncoded = encodeURIComponent(raw);
+  const base64 = btoa(cleaned);
+  const addButton = e.submitter || document.querySelector('.search-bar button');
+
+  Object.values(categories).flat().forEach(t => {
+	if (t.skipSearch) return; // 🔒 Skip updating this tool, these are other things
+	
+    if (!t.originalUrl) {
+      t.originalUrl = t.template || t.url;
+    }
+
+    let finalQuery = encoded;
+
+    // ✅ Tools needing full URL-encoded raw input
+    if (t.originalUrl.includes("web-check.xyz")) {
+      finalQuery = fullEncoded;
+    }
+
+    // ✅ MetaDefender: use base64 encoding
+    if (t.originalUrl.includes("metadefender.opswat.com")) {
+      finalQuery = base64;
+    }
+
+    if (t.template) {
+      t.url = t.originalUrl.replaceAll('{{query}}', finalQuery);
+    } else {
+      t.url = t.originalUrl + finalQuery;
+    }
+  });
+
+  renderAll(document.getElementById('filter').value.trim().toLowerCase());
+
+  addButton.style.backgroundColor = '#22c55e';
+  setTimeout(() => {
+    addButton.style.backgroundColor = '';
+  }, 500);
+}
+
+
+
+	renderAll();
+  </script>
+	 
+<footer style="margin-top: 3rem; text-align: center; font-size: 0.95rem; padding: 1rem 0; border-top: 1px solid var(--muted); color: var(--muted); transition: all 0.3s ease;">
+  🛡️ Made for defenders, by 
+  <a href="https://www.linkedin.com/in/ekremozdemir19/" 
+     target="_blank" 
+     title="https://www.linkedin.com/in/ekremozdemir19/"
+     style="color: var(--primary); font-weight: 600; text-decoration: none; transition: color 0.3s ease;">
+    Ekrem O.
+  </a>
+</footer>
+
+
+
+
+</body>
+</html>

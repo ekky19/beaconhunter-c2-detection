@@ -1,0 +1,300 @@
+
+    <html>
+    <head>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f0f2f5;
+                color: #333;
+                padding: 30px;
+            }
+            h2 {
+                text-align: center;
+                color: #1a237e;
+            }
+            .styled {
+                width: 95%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            .styled th {
+                background-color: #3f51b5;
+                color: white;
+                padding: 10px;
+                font-size: 14px;
+            }
+            .styled td {
+                padding: 10px;
+                border: 1px solid #ccc;
+                font-size: 13px;
+                background-color: #fff;
+            }
+            .styled tr:nth-child(even) td {
+                background-color: #f9f9f9;
+            }
+            a {
+                color: #0073e6;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Beaconing Detection Report - 20250515_043855</h2>
+        <table border="1" class="dataframe styled">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Source IP</th>
+      <th>Destination IPs</th>
+      <th>Asset</th>
+      <th>User</th>
+      <th>Interval (s)</th>
+      <th>Consistency (%)</th>
+      <th>Anomaly Score</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Total Events</th>
+      <th>C2 Match</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>192.168.1.193</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Laptop-03</td>
+      <td>alice</td>
+      <td>60.0</td>
+      <td>80.0</td>
+      <td>48</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:24:00</td>
+      <td>26</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.1.211</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Workstation-01</td>
+      <td>charlie</td>
+      <td>60.0</td>
+      <td>97.0</td>
+      <td>59</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:32:00</td>
+      <td>34</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.1.89</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Laptop-03</td>
+      <td>alice</td>
+      <td>60.0</td>
+      <td>97.3</td>
+      <td>59</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:36:00</td>
+      <td>38</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.2.252</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Workstation-02</td>
+      <td>charlie</td>
+      <td>60.0</td>
+      <td>87.2</td>
+      <td>53</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:38:00</td>
+      <td>40</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.3.100</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Server-01</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>86.7</td>
+      <td>53</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:15:00</td>
+      <td>16</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.3.164</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Laptop-03</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>86.5</td>
+      <td>52</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:36:00</td>
+      <td>38</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.3.181</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Server-01</td>
+      <td>charlie</td>
+      <td>60.0</td>
+      <td>95.0</td>
+      <td>57</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:19:00</td>
+      <td>21</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.4.162</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Workstation-01</td>
+      <td>david</td>
+      <td>60.0</td>
+      <td>80.6</td>
+      <td>49</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:31:00</td>
+      <td>32</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.4.97</td>
+      <td><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Workstation-02</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>81.5</td>
+      <td>49</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:26:00</td>
+      <td>28</td>
+      <td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.5.135</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Server-02</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>97.2</td>
+      <td>59</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:35:00</td>
+      <td>37</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.5.146</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=1.92.100.58' target='_blank'>1.92.100.58</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Laptop-03</td>
+      <td>david</td>
+      <td>60.0</td>
+      <td>82.8</td>
+      <td>50</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:28:00</td>
+      <td>30</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=1.92.100.58' target='_blank'>1.92.100.58</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.5.229</td>
+      <td><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+      <td>Server-02</td>
+      <td>alice</td>
+      <td>60.0</td>
+      <td>93.8</td>
+      <td>57</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:15:00</td>
+      <td>17</td>
+      <td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.5.247</td>
+      <td><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Server-01</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>92.3</td>
+      <td>56</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:26:00</td>
+      <td>27</td>
+      <td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+    <tr>
+      <td>192.168.5.27</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=104.244.42.1' target='_blank'>104.244.42.1</a><br><a href='../OSINT.HTML?ip=13.107.246.40' target='_blank'>13.107.246.40</a><br><a href='../OSINT.HTML?ip=142.250.72.206' target='_blank'>142.250.72.206</a><br><a href='../OSINT.HTML?ip=151.101.1.69' target='_blank'>151.101.1.69</a><br><a href='../OSINT.HTML?ip=172.217.3.110' target='_blank'>172.217.3.110</a><br><a href='../OSINT.HTML?ip=185.199.108.153' target='_blank'>185.199.108.153</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=23.32.57.169' target='_blank'>23.32.57.169</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a><br><a href='../OSINT.HTML?ip=99.84.181.104' target='_blank'>99.84.181.104</a></td>
+      <td>Server-01</td>
+      <td>bob</td>
+      <td>60.0</td>
+      <td>100.0</td>
+      <td>60</td>
+      <td>2025-05-08 09:00:00</td>
+      <td>2025-05-08 09:29:00</td>
+      <td>30</td>
+      <td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a><br><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a><br><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td>
+    </tr>
+  </tbody>
+</table>
+        
+        <h3 style='color:#d32f2f;text-align:center;margin-top:40px;'>⚠️ Known C2 IPs Contacted Without Beaconing</h3>
+        <table class='styled'>
+            <thead>
+                <tr><th>Source</th><th>Destination</th><th>First Connection</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>192.168.1.184</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 10:38:00</td></tr>
+<tr><td>192.168.1.184</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.1.184</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:02:00</td></tr>
+<tr><td>192.168.1.195</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 10:25:00</td></tr>
+<tr><td>192.168.1.195</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.1.195</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:38:00</td></tr>
+<tr><td>192.168.1.199</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.1.199</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 11:45:00</td></tr>
+<tr><td>192.168.1.199</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:10:00</td></tr>
+<tr><td>192.168.1.8</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:48:00</td></tr>
+<tr><td>192.168.1.8</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.1.8</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 10:05:00</td></tr>
+<tr><td>192.168.1.92</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:05:00</td></tr>
+<tr><td>192.168.1.92</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:44:00</td></tr>
+<tr><td>192.168.1.92</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 10:13:00</td></tr>
+<tr><td>192.168.2.203</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:27:00</td></tr>
+<tr><td>192.168.2.203</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 10:31:00</td></tr>
+<tr><td>192.168.2.203</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:08:00</td></tr>
+<tr><td>192.168.2.218</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:18:00</td></tr>
+<tr><td>192.168.2.218</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 10:04:00</td></tr>
+<tr><td>192.168.2.245</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 10:53:00</td></tr>
+<tr><td>192.168.2.245</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 11:46:00</td></tr>
+<tr><td>192.168.2.245</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:05:00</td></tr>
+<tr><td>192.168.3.169</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:44:00</td></tr>
+<tr><td>192.168.3.169</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:10:00</td></tr>
+<tr><td>192.168.3.169</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.3.171</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:35:00</td></tr>
+<tr><td>192.168.3.230</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 13:23:00</td></tr>
+<tr><td>192.168.3.230</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:06:00</td></tr>
+<tr><td>192.168.3.230</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 10:25:00</td></tr>
+<tr><td>192.168.4.187</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 10:00:00</td></tr>
+<tr><td>192.168.4.187</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:50:00</td></tr>
+<tr><td>192.168.4.82</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:17:00</td></tr>
+<tr><td>192.168.4.82</td><td><a href='../OSINT.HTML?ip=8.218.120.126' target='_blank'>8.218.120.126</a></td><td>2025-05-08 09:05:00</td></tr>
+<tr><td>192.168.5.159</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.5.159</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:54:00</td></tr>
+<tr><td>192.168.5.183</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 09:00:00</td></tr>
+<tr><td>192.168.5.183</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 12:14:00</td></tr>
+<tr><td>192.168.5.6</td><td><a href='../OSINT.HTML?ip=1.13.156.116' target='_blank'>1.13.156.116</a></td><td>2025-05-08 10:16:00</td></tr>
+<tr><td>192.168.5.6</td><td><a href='../OSINT.HTML?ip=209.74.71.198' target='_blank'>209.74.71.198</a></td><td>2025-05-08 09:01:00</td></tr>
+            </tbody>
+        </table>
+        
+    </body>
+    </html>
+    
