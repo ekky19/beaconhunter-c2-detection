@@ -131,7 +131,7 @@ Anomaly Score = (Consistency % / Mode Interval)
 | Consistency         | 100%                  |
 | Anomaly Score       | 100 / 60 = **1.66**   |
 
----
+
 
 ### 🔍 How to interpret:
 
