@@ -3,6 +3,16 @@
 
 ---
 
+## 📅 Example Usage
+
+```bash
+python beaconhunter.py
+```
+
+* Scans all CSVs in the `CSVs/` folder
+* Generates detailed and modernized reports
+---
+
 ![image](https://github.com/user-attachments/assets/f61132d4-b1d8-4805-86e0-3b462b3a4f8c)
 
 ![image](https://github.com/user-attachments/assets/1bf6e382-b4cf-407c-9e73-7ef76eba7bd3)
@@ -156,17 +166,6 @@ Anomaly Score = (Consistency % / Mode Interval)
 
 **Q:** How are “non-beaconing but known C2 contacts” handled?
 **A:** They are logged in a separate section if the source contacted a known C2 IP but didn’t meet the beaconing threshold.
-
----
-
-## 📅 Example Usage
-
-```bash
-python beaconhunter.py
-```
-
-* Scans all CSVs in the `CSVs/` folder
-* Generates detailed and modernized reports
 
 ---
 ### Key Differences
