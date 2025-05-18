@@ -64,11 +64,43 @@ def generate_reports(df: pd.DataFrame, output_dir: str, non_beaconing_c2: list =
     cols_order = ['Source IP', 'Destination IPs', 'Asset', 'User', 'Interval (s)',
                   'Consistency (%)', 'Anomaly Score', 'Start Time', 'End Time', 'Total Events', 'C2 Match']
     display_df = df[cols_order].copy()
+    
+    # Store original column names for tooltips
+    original_cols = display_df.columns.tolist()
+
+    # Convert for display (visual only)
+    display_df.columns = [col.upper() for col in display_df.columns]
+
+    
+    tooltip_map = {
+        "Source IP": "The internal IP that initiated the connection",
+        "Destination IPs": "All external IPs contacted by the source",
+        "Asset": "The asset name or hostname",
+        "User": "The associated username",
+        "Interval (s)": "Most common interval between connections",
+        
+        "Consistency (%)": "🔍 Consistency (%) measures how regularly a host communicates.\n\nIt’s based on how many connection intervals match the most common interval (±10s).\n\nExample:\nIf timestamps are:\n08:00:00, 08:01:00, 08:02:00, 08:03:00, 08:06:00\n\nIntervals = [60s, 60s, 60s, 180s]\nMode = 60s\nMatches within ±10s = 3 out of 4\n\n✅ Consistency = (3/4) × 100 = 75%",
+
+        
+        "Anomaly Score": "Anomaly Score reflects how suspiciously regular the beaconing pattern is.\n\nIt’s calculated as:\nAnomaly Score = Consistency (%) / Interval (s)\n\nExample:\nIf a source sends packets every 60 seconds, with 90% consistency:\nAnomaly Score = 90 / 60 = 1.5\n\n🔎 Higher score = more suspicious (frequent and highly consistent communication).",
+
+        
+        "Start Time": "Time of first connection",
+        "End Time": "Time of last connection",
+        "Total Events": "Total number of observed connections",
+        "C2 Match": "Known C2 IPs from threat feeds"
+    }
+
+    html_table = "<table class='styled'><thead><tr>" + \
+    "".join([f"<th title='{tooltip_map.get(orig, '')}'>{col}</th>" for orig, col in zip(original_cols, display_df.columns)]) + \
+    "</tr></thead><tbody>" + \
+    display_df.to_html(index=False, escape=False, header=False).split("<tbody>")[1]
+
 
     json_path = os.path.join(output_dir, f"beaconing_report_{timestamp}.json")
     display_df.to_json(json_path, orient="records", indent=2)
 
-    # Handle known C2 IPs contacted without beaconing
+    # Known C2 IPs contacted without beaconing
     non_beaconing_html = ""
     if non_beaconing_c2:
         known_summary = {}
@@ -93,7 +125,7 @@ def generate_reports(df: pd.DataFrame, output_dir: str, non_beaconing_c2: list =
         <h3 style='color:#d32f2f;text-align:center;margin-top:40px;'>⚠️ Known C2 IPs Contacted Without Beaconing</h3>
         <table class='styled'>
             <thead>
-                <tr><th>Source</th><th>Destination</th><th>First Connection</th></tr>
+                <tr><th>SOURCE</th><th>DESTINATION</th><th>FIRST CONNECTION</th></tr>
             </thead>
             <tbody>
                 {rows}
@@ -102,7 +134,6 @@ def generate_reports(df: pd.DataFrame, output_dir: str, non_beaconing_c2: list =
         """
 
     html_path = os.path.join(output_dir, f"beaconing_report_{timestamp}.html")
-    html_table = display_df.to_html(index=False, escape=False, classes='styled')
 
     full_html = f"""
     <html>
@@ -129,12 +160,14 @@ def generate_reports(df: pd.DataFrame, output_dir: str, non_beaconing_c2: list =
                 color: white;
                 padding: 10px;
                 font-size: 14px;
+                text-align: center;
             }}
             .styled td {{
                 padding: 10px;
                 border: 1px solid #ccc;
                 font-size: 13px;
                 background-color: #fff;
+                text-align: center;
             }}
             .styled tr:nth-child(even) td {{
                 background-color: #f9f9f9;
