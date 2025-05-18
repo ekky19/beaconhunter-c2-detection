@@ -15,7 +15,6 @@ python beaconhunter.py
 
 ![image](https://github.com/user-attachments/assets/2e184ec1-294e-4d2e-bf7b-ebe5b13cdf21)
 
-
 ![image](https://github.com/user-attachments/assets/1bf6e382-b4cf-407c-9e73-7ef76eba7bd3)
 
 ![image](https://github.com/user-attachments/assets/c82e3712-6509-4719-996f-715d3dc229c4)
