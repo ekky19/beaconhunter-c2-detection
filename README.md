@@ -176,7 +176,7 @@ Here’s a breakdown of the key differences between the Python-based BeaconHunte
 | Feature                                | PowerShell Version        | Python Version (Current)       |
 | -------------------------------------- | ------------------------  | ------------------------------ |
 | Basic interval-based beacon detection  | ✅                        | ✅                              |
-| Automatic jitter tolerance             | ❌ (manual logic)         | ✅ (±10s variation built-in)    |
+| Automatic jitter tolerance             | ✅                        | ✅ (±10s variation built-in)    |
 | Multi-destination grouping             | ❌ (single dst per cycle) | ✅                              |
 | Known C2 match logic                   | ❌                        | ✅ Uses ThreatFox JSON feeds    |
 | Non-beaconing but known C2 connections | ❌                        | ✅                              |
