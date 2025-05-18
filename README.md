@@ -13,7 +13,8 @@ python beaconhunter.py
 * Generates detailed and modernized reports
 ---
 
-![image](https://github.com/user-attachments/assets/f61132d4-b1d8-4805-86e0-3b462b3a4f8c)
+![image](https://github.com/user-attachments/assets/2e184ec1-294e-4d2e-bf7b-ebe5b13cdf21)
+
 
 ![image](https://github.com/user-attachments/assets/1bf6e382-b4cf-407c-9e73-7ef76eba7bd3)
 
